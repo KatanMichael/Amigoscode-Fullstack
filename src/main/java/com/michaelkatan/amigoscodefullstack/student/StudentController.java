@@ -20,4 +20,5 @@ public class StudentController
                 "Katan","Email", Student.Gender.MALE));
         return list;
     }
+
 }
