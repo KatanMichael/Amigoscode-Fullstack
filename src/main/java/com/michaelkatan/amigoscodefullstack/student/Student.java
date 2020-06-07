@@ -9,6 +9,7 @@ public class Student
     private final String lastName;
     private final String email;
     private final Gender gender;
+    private final String key;
 
     enum Gender
     {
@@ -16,12 +17,13 @@ public class Student
     }
 
     public Student(
-            UUID studentId,
+                UUID studentId,
             String firstName,
             String lastName,
             String email,
             Gender gender) {
         this.studentId = studentId;
+        this.key = studentId.toString();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -46,5 +48,9 @@ public class Student
 
     public Gender getGender() {
         return gender;
+    }
+
+    public String getKey() {
+        return key;
     }
 }

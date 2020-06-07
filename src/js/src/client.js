@@ -1,6 +1,5 @@
 import fetch from "unfetch"
 
-export default function getAllStudnets()
-{
-    return fetch("/student");
+export default function getAllStudents () {
+    return fetch('http://localhost:8080/students');
 }
