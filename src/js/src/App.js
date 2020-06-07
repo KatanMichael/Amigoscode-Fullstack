@@ -2,7 +2,11 @@ import React from 'react';
 import './App.css';
 import getAllStudents from "./client"
 import 'antd/dist/antd.css';
-import {Table} from "antd"
+import {Table, Avatar, Spin, Icon} from "antd"
+
+
+const antIcon = <icon type = "LoadingOutlined" style={{ fontSize: 24 }} spin />;
+
 
 class App extends React.Component
 {
@@ -12,10 +16,12 @@ class App extends React.Component
     super()
     this.state = 
     {
-      students : []
+      students : [],
+      isFetching : false
     }
   }
 
+  
 
   componentDidMount()
   {
@@ -25,12 +31,18 @@ class App extends React.Component
 
   fetchAllStudents()
   {
+    this.setState(
+      {
+        isFetching : true
+      }
+    )
     getAllStudents()
     .then(result => result.json())
     .then(data => {
        this.setState(
          {
-          students: data
+          students: data,
+          isFetching : false
          }
        )
       });
@@ -38,12 +50,31 @@ class App extends React.Component
 
   render()
   {
-    const {students} = this.state
+    const {students, isFetching} = this.state
     console.log("Render: ",this.state)
+
+    if(isFetching)
+    {
+      return(
+        <Spin indicator = {antIcon} />
+      )
+    }
 
     if(students && students.length)
     {
       const colums = [
+        {
+          title: '',
+          key : 'Avatar',
+          render : function(text, student)
+          {
+            return(
+              <Avatar size = "large">
+                {student.firstName.charAt(0).toUpperCase()+student.lastName.charAt(0).toUpperCase() }
+              </Avatar>
+            )
+          }
+        },
         {
           title: 'StudentId',
           dataIndex: "studentId",
@@ -71,7 +102,9 @@ class App extends React.Component
         } 
       ];
 
-      return <Table dataSource = {students} columns = {colums}/>;
+      return (
+          <Table dataSource = {students} columns = {colums} rowKey = "studentId" pagination = {false} />
+      );
     }
     else{
       return <h1>No students Found</h1>
