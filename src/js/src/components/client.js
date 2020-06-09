@@ -1,5 +1,5 @@
 import fetch from "unfetch"
 
 export default function getAllStudents () {
-    return fetch('https://amigoscode-fullstack.herokuapp.com/students');
+    return fetch('http://localhost:8080/api/students');
 }

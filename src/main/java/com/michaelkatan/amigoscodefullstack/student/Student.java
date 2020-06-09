@@ -9,7 +9,7 @@ public class Student
     private final String lastName;
     private final String email;
     private final Gender gender;
-    private final String key;
+    //private final String key;
 
     enum Gender
     {
@@ -23,7 +23,7 @@ public class Student
             String email,
             Gender gender) {
         this.studentId = studentId;
-        this.key = studentId.toString();
+       // this.key = studentId.toString();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -50,7 +50,5 @@ public class Student
         return gender;
     }
 
-    public String getKey() {
-        return key;
-    }
+
 }
